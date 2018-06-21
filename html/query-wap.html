@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>学员信息查询结果</title>
+		<link rel="shortcut icon " type="images/x-icon" href="images/icon.ico">
+		<link rel="stylesheet" type="text/css" href="css/public.css"/>
+		<script type="text/javascript" src="js/zepto.js" ></script>
+		<script type="text/javascript">
+			//网页自适应JS代码
+			(function(doc, win) {
+				var docEl = doc.documentElement,
+					resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+					recalc = function() {
+						var clientWidth = docEl.clientWidth;
+						if(!clientWidth) return;
+						docEl.style.fontSize = 20 * (clientWidth / 320) + 'px';
+					};
+
+				if(!doc.addEventListener) return;
+				win.addEventListener(resizeEvt, recalc, false);
+				doc.addEventListener('DOMContentLoaded', recalc, false);
+				recalc();
+			})(document, window);
+		</script>
+		<style type="text/css">
+			body{background: #E4E4E4;}
+			h2{text-align: center;font-size: 1rem;padding: 0.6rem 0;}
+			.cjcxjg{width: 12.5rem;margin: 0 auto;padding: 0.5rem;}
+			.cjcxjg .cjcxjg-ul li{height: 1rem;margin-bottom: 0.4rem;}
+			.cjcxjg .cjcxjg-ul li p{float: left;font-size: 0.8rem;color: #000000;}
+			.cjcxjg .cjcxjg-ul li p.text{width: 8.5rem;margin-left: 0.5rem; border-bottom: 0.01rem solid #0073F0;text-align: center;}
+			.cjcxjg .cjcxjg-ul li img.designation-img{display: block;width: 5.4rem;margin: 0 auto;}
+			.cjcxjg .cjcxjg-ul li.cjcsjg-img{height: 8rem;}
+		</style>
+	</head>
+
+	<body>
+		<h2>学员信息</h2>
+		<div class="cjcxjg"></div>
+		<div id="wait" style="display:none;width:3rem;margin: 0 auto;">
+			<img src='http://www.w3school.com.cn/i/demo_wait.gif'  />
+			<br />加载中 ...
+		</div>
+		<script type="text/javascript">
+			function getUrlParam(name) {
+	            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+	            var r = window.location.search.substr(1).match(reg);  //匹配目标参数
+	            if (r != null) return unescape(r[2]); return null; //返回参数值
+	      };
+	      // var certificateNum = getUrlParam('certificateNum');证书编号
+	       var idNum = getUrlParam('id');
+			$.ajax({
+			  type: 'GET',
+			  url: '/renren-admin/api/getInfo',
+			  // data to be added to query string:
+			  data: {certificateNum: idNum},
+			  // type of data we are expecting in return:
+			  dataType: 'json',
+			  timeout: 300,
+			  context: $('body'),
+			  beforeSend:function () {
+			        $("#wait").css("display","block");
+			    },
+			  complete: function () {
+			        $("#wait").css("display","none");
+			    },
+			  success: function(data){
+			    var data1 = data.data;
+	            var html='';
+	            if (data.code==0) {
+		            if(data!=null){
+		            	html = html+'<ul class="cjcxjg-ul">'+
+		            	'<li class="clearfix cjcsjg-img">'+'<img class="designation-img"'+' '+'src="'+'http://zyrcrz.org.cn/image/'+ data1.idNum +'.jpg" />'+'</li>'+
+			            '<li class="clearfix">'+'<p class="designation">姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名:</p>'+'<p class="text">'+data1.name+'</p></li>'+
+						'<li class="clearfix">'+'<p class="designation">性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别:</p>'+'<p class="text">'+data1.gender+'</p></li>'+
+						'<li class="clearfix">'+'<p class="designation">证件号码:</p>'+'<p class="text">'+data1.idNum+'</p></li>'+
+						'<li class="clearfix">'+'<p class="designation">岗位名称:</p>'+'<p class="text">'+data1.skill+'</p></li>'+
+						'<li class="clearfix">'+'<p class="designation">级&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别:</p>'+'<p class="text">'+data1.level+'</p></li>'+
+						'<li class="clearfix">'+'<p class="designation">证书编号:</p>'+'<p class="text">'+data1.certificateNum+'</p></li>'+
+						'</ul>';
+						$(".cjcxjg").html("").append(html);
+		            }else{
+						$(".cjcxjg h2").html('<h2 style="color: red;font-size: 0.6rem;text-align: center;">信息错误</h2>');
+		            }
+		        }else if(data.code==500){
+	        		alert("系统出错了,我们正在全力维护中......")
+	        	}else{
+	        		alert("您输入的内容有误!")
+	        	}
+					},
+			  error: function(){
+			    $(".cjcxjg h2").html('<h2 style="color: red;font-size: 0.6rem;text-align: center;">网络发生错误</h2>');
+			  }
+			});
+		</script>
+	</body>
+</html>

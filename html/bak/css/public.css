@@ -1,0 +1,150 @@
+@charset "utf-8";
+/* CSS Document */
+body,
+div,
+dl,
+dt,
+dd,
+ul,
+ol,
+li,
+h1,
+h2,
+h3,
+h4,
+h4,
+h5,
+h6,
+pre,
+form,
+fieldset,
+textarea,
+p,
+blockquote,
+table,
+tr,
+th,
+td,
+input,
+a,
+span,
+img {
+	padding: 0;
+	margin: 0;
+	font-size: 14px;
+	font-family: Microsoft Yahei;
+}
+body {
+	color: #464646;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+fieldset,
+img {
+	border: 0;
+}
+address,
+caption,
+cite,
+code,
+dfn,
+em,
+th,
+var {
+	font-weight: normal;
+	font-style: normal;
+}
+caption {
+	text-align: left;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-weight: normal;
+	font-size: 100%;
+}
+i {
+	font-style: normal;
+}
+object,
+a {
+	outline: 0;
+	color: #8792CC;
+}
+a {
+	text-decoration: none;
+	outline: none;
+	outline: none;
+}
+a:hover {
+	text-decoration: none;
+}
+ul,
+dl {
+	list-style: none outside none;
+}
+div,
+p,
+a {} img {
+	border: none;
+	outline: none;
+}
+li {
+	list-style: none outside none;
+}
+a,
+a img {
+	outline: none;
+	border: none;
+}
+.main {
+	width: 1100px;
+	margin: 0 auto;
+	position: relative;
+}
+.w1100 {
+	width:1100px;
+	margin: 0 auto;
+}
+.right {
+	float: right;
+	text-align: right;
+}
+.left {
+	float: left;
+}
+.clear {
+	clear: both;
+}
+.ell {
+	word-break: keep-all;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+.clearfix:before,
+.clearfix:after {
+	content: '.';
+	display: block;
+	overflow: hidden;
+	visibility: hidden;
+	font-size: 0;
+	line-height: 0;
+	width: 0;
+	height: 0;
+}
+.clearfix:after {
+	clear: both;
+}
+.clearfix {
+	zoom: 1;
+}
+.hide {
+	display: none;
+}
+/*以上是标签重定义*/
